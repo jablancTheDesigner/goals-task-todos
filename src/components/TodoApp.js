@@ -71,8 +71,8 @@ export default function TodoApp() {
         <div className="todo-app flex flex-col">
             <div className="p-4 text-center bg-lime-800/[0.8]">
                 <div className="container mx-auto">
-                    <h1 className="todo-app__title text-5xl font-bold text-white">Todo or Not Do</h1>
-                    <p className="todo-app__sub-title text-white">Made by Jahmal &amp; Built in React</p>
+                    <h1 className="todo-app__title text-5xl font-bold text-white"><em>my</em>Todos</h1>
+                    <p className="todo-app__sub-title text-white text-md">Made by Jahmal &amp; Built in React</p>
                 </div>
             </div>
 
