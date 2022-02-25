@@ -25,11 +25,7 @@ export default function TodoApp() {
 
     function createOpenMsg() {
         return (
-            <div>
-                <div className="contaianer">
-                    <h1 className="text-4xl text-white bold">No Tasks</h1>
-                </div>
-            </div>
+            <h1 className="text-4xl bold">No Tasks</h1>
         )
     }
 
@@ -72,27 +68,25 @@ export default function TodoApp() {
     }
 
     return (
-        <div className="todo-app">
-            <div className="h-screen flex flex-col">
-                <div className="p-4 mb-4 text-center">
-                    <div className="container mx-auto">
-                        <h1 className="todo-app__title text-3xl font-bold underline">Todo App</h1>
-                        <p className="todo-app__sub-title">Made by Jahmal &amp; Built in React</p>
+        <div className="todo-app flex flex-col">
+            <div className="p-4 mb-4 text-center">
+                <div className="container mx-auto">
+                    <h1 className="todo-app__title text-5xl font-bold underline text-white">Todo App</h1>
+                    <p className="todo-app__sub-title text-white">Made by Jahmal &amp; Built in React</p>
+                </div>
+            </div>
+
+            <div className="text-center">
+                <div className="container mx-auto">
+                    <div className="todo-app__task-list px-2 md:w-5/6 mx-auto">
+                        {taskList}
                     </div>
                 </div>
+            </div>
 
-                <div className="text-center">
-                    <div className="container mx-auto">
-                        <div className="todo-app__task-list px-2 w-2/3 mx-auto">
-                            {taskList}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-auto">
-                    <h2 className="todo-app__task-header mb-4 text-center text-3xl bold text-white">{headerText}</h2>
-                    <TodoForm addTask={addTask} />
-                </div>
+            <div className="mt-auto fixed bottom-0 left-0 right-0 z-10">
+                <h2 className="todo-app__task-header text-center text-2xl font-medium text-white bg-lime-800 p-2 opacity-50">{headerText}</h2>
+                <TodoForm addTask={addTask} />
             </div>
         </div>
     )

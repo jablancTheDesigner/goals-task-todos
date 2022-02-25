@@ -17,3 +17,7 @@ body {
   height: 100%;
 }
 
+.todo-app{
+  min-height:100%;
+}
+
