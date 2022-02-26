@@ -25,7 +25,7 @@ export default function TodoApp() {
 
     function createOpenMsg() {
         return (
-            <h1 className="text-4xl bold fixed left-0 right-0 inset-y-2/4 -translate-y-2/4 text-white">No Tasks</h1>
+            <h1 className="text-4xl bold fixed left-0 right-0 inset-y-2/4 -translate-y-2/4 text-lime-800">No Tasks</h1>
         )
     }
 
