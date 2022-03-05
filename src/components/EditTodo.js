@@ -24,17 +24,17 @@ export default function EditTodo(props) {
           placeholder={`New name for "${props.name}"`}
         />
         <button
+          type="submit"
+          className="btn btn__primary todo-edit p-3 bg-sky-700 text-white hover:bg-sky-800 col-span-3 md:col-span-1"
+        >
+          Save
+        </button>
+        <button
           type="button"
           className="btn todo-cancel p-3 bg-red-700 text-white hover:bg-red-800 col-span-3 md:col-span-1"
           onClick={() => props.setIsEditing(false)}
         >
           Cancel
-        </button>
-        <button
-          type="submit"
-          className="btn btn__primary todo-edit p-3 bg-sky-700 text-white hover:bg-sky-800 col-span-3 md:col-span-1"
-        >
-          Save
         </button>
       </div>
     </form>
