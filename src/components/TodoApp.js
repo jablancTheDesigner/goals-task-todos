@@ -1,96 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
-import { nanoid } from "nanoid";
+import Board from "./Board";
+import { useSelector } from "react-redux";
+import { getTodos } from "../redux/reducers/todoSlice";
 
 export default function TodoApp() {
-  const [tasks, setTasks] = useState([]);
-  const headerText = `${tasks.length} ${tasks.length === 1 ? "task" : "tasks"}`;
-  const taskList = tasks.length > 0 ? renderTasks() : noTasks();
+  const todosV2 = useSelector(getTodos);
+  const backlogList = todosV2.filter((task) => !task.active);
+  const activeList = todosV2.filter(
+    (task) => task.active && !task.completed && !task.inProgress
+  );
+  const completeList = todosV2.filter((task) => task.completed);
+  const inProgressList = todosV2.filter((task) => task.inProgress);
 
-  function renderTasks() {
-    const list = tasks
-      .sort((a, b) => {
-        return b.created - a.created;
-      })
-      .map((task) => {
-        return (
-          <Todo
-            name={task.name}
-            key={task.id}
-            id={task.id}
-            toggleCompleted={toggleCompleted}
-            editTask={editTask}
-            deleteTask={deleteTask}
-            completed={task.completed}
-          />
-        );
-      });
-    return list;
-  }
-
-  function noTasks() {
+  const renderBoard = (name, title, list) => {
     return (
-      <h1 className="text-4xl bold fixed left-0 right-0 inset-y-2/4 -translate-y-2/4 text-lime-800 text-center">
-        No Tasks
-      </h1>
+      <Board title={title}>
+        {list.map((item) => {
+          return (
+            <Todo
+              name={item.name}
+              key={`${name}-${item.id}`}
+              id={item.id}
+              completed={item.completed}
+              inProgress={item.inProgress}
+              active={item.active}
+            />
+          );
+        })}
+      </Board>
     );
-  }
-
-  function addTask(name) {
-    const newTask = {
-      id: "task_" + nanoid(),
-      name: name,
-      completed: false,
-      created: Date.now(),
-    };
-    storeTask([...tasks, newTask]);
-  }
-
-  function toggleCompleted(id) {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, completed: !task.completed };
-      }
-      return task;
-    });
-    storeTask(updatedTasks);
-  }
-
-  function deleteTask(id) {
-    const remaingTasks = tasks.filter((task) => task.id !== id);
-    storeTask(remaingTasks);
-  }
-
-  function editTask(id, newName) {
-    const editedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, name: newName };
-      }
-      return task;
-    });
-    storeTask(editedTasks);
-  }
-
-  function storeTask(data) {
-    setTasks(data);
-    localStorage.setItem("todos", JSON.stringify(data));
-  }
-
-  function getStoredTasks() {
-    const reference = localStorage.getItem("todos");
-    let storedTodos = [];
-    // if reference exists
-    if (reference) {
-      // converts back to array and store it in todos array
-      storedTodos = JSON.parse(reference);
-    }
-    setTasks(storedTodos);
-  }
-
-  useEffect(() => {
-    getStoredTasks();
-  }, []);
+  };
 
   return (
     <div className="todo-app flex flex-col">
@@ -105,15 +46,15 @@ export default function TodoApp() {
         </div>
       </div>
 
-      <div className="todo-app__task-list p-4 md:w-5/6 grow overflow-y-auto md:mx-auto">
-        <div className="container mx-auto">{taskList}</div>
+      <div className="todo-app__task-list p-4 grow flex gap-4 overflow-x-auto flex-nowrap">
+        {renderBoard("backlog", "Backlog", backlogList)}
+        {renderBoard("toDo", "To Do", activeList)}
+        {renderBoard("inProgress", "In Progress", inProgressList)}
+        {renderBoard("complete", "Complete", completeList)}
       </div>
 
       <div className="todo-app__form">
-        <h2 className="todo-app__task-header text-center text-2xl font-medium text-white bg-lime-800/[0.8] p-2">
-          {headerText}
-        </h2>
-        <TodoForm addTask={addTask} />
+        <TodoForm />
       </div>
     </div>
   );

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editTodo } from "../redux/reducers/todoSlice";
+
+const btnclass =
+  "p-2 text-sm bg-gray-200 text-gray-900 hover:bg-gray-700 hover:text-white flex-1";
 
 export default function EditTodo(props) {
+  const dispatch = useDispatch();
   const [newName, setNewName] = useState("");
   function handleChange(e) {
     setNewName(e.target.value);
@@ -8,30 +14,31 @@ export default function EditTodo(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.editTask(props.id, newName);
+    const payload = {
+      id: props.id,
+      data: newName,
+    };
+    dispatch(editTodo(payload));
     props.setIsEditing(false);
     setNewName("");
   }
 
   return (
     <form className="stack-small text-center mb-4" onSubmit={handleSubmit}>
-      <div className="grid grid-cols-6">
+      <div className="flex flex-wrap gap-2">
         <input
           id={props.id}
-          className="todo-text p-3 col-span-full md:col-span-4"
+          className="todo-text p-3 w-full drop-shadow-lg"
           type="text"
           onChange={handleChange}
           placeholder={`New name for "${props.name}"`}
         />
-        <button
-          type="submit"
-          className="btn btn__primary todo-edit p-3 bg-sky-700 text-white hover:bg-sky-800 col-span-3 md:col-span-1"
-        >
+        <button type="submit" className={btnclass}>
           Save
         </button>
         <button
           type="button"
-          className="btn todo-cancel p-3 bg-red-700 text-white hover:bg-red-800 col-span-3 md:col-span-1"
+          className={btnclass}
           onClick={() => props.setIsEditing(false)}
         >
           Cancel

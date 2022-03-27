@@ -1,36 +1,49 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  activate,
+  deactivate,
+  deleteTodo,
+  toggleCompleted,
+  toggleInProgress,
+} from "../redux/reducers/todoSlice";
+
+const btnclass =
+  "p-2 text-sm bg-gray-200 text-gray-900 hover:bg-gray-700 hover:text-white flex-1";
+
+function TodoAction({ name, func }) {
+  const dispatch = useDispatch();
+  return (
+    <button type="button" className={btnclass} onClick={() => dispatch(func)}>
+      {name}
+    </button>
+  );
+}
 
 export default function ViewTodo(props) {
   return (
-    <div className={`view-todo drop-shadow-lg mb-4 grid grid-cols-6`}>
+    <div className={`view-todo mb-4 flex flex-wrap gap-2`}>
       <div
-        className="view-todo__details col-span-full text-left flex items-center p-2 hover:opacity-90 cursor-pointer bg-white"
-        onClick={() => props.toggleCompleted(props.id)}
+        className="view-todo__details w-full text-left p-3 bg-white cursor-text drop-shadow-lg"
+        onClick={() => props.setIsEditing(true)}
       >
-        <label
-          className={`view-todo__label ml-2 text-2xl 
-          ${props.completed ? "line-through opacity-50 blur-[1px]" : ""}`}
-          htmlFor={props.id}
-        >
+        <label className={`view-todo__label ml-2 text-base`} htmlFor={props.id}>
           {props.name}
         </label>
       </div>
-      {!props.completed && (
-        <button
-          type="button"
-          className=" bg-sky-700 text-white hover:bg-sky-800 transition py-2 px-4 col-span-3 md:col-span-1 md:col-start-5"
-          onClick={() => props.setIsEditing(true)}
-        >
-          Edit
-        </button>
+      {!props.inProgress && props.active && (
+        <TodoAction name="Progress" func={toggleInProgress(props.id)} />
       )}
-      <button
-        type="button"
-        className="bg-red-700 text-white hover:bg-red-800 transition py-2 px-4 col-span-3 md:col-span-1 col-start-4 md:col-start-6"
-        onClick={() => props.deleteTask(props.id)}
-      >
-        Delete
-      </button>
+      {!props.completed && props.active && (
+        <TodoAction name="Complete" func={toggleCompleted(props.id)} />
+      )}
+      {!props.active && (
+        <TodoAction name="Activate" func={activate(props.id)} />
+      )}
+      {props.active && (
+        <TodoAction name="Backlog" func={deactivate(props.id)} />
+      )}
+      <TodoAction name="Delete" func={deleteTodo(props.id)} />
     </div>
   );
 }
