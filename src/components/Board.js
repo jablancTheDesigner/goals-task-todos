@@ -2,7 +2,7 @@ import React from "react";
 
 function Board({ children, title, count }) {
   return (
-    <div className="w-1/3 h-100 flex flex-col" style={{ minWidth: "450px" }}>
+    <div className="w-1/3 h-100 flex flex-col" style={{ minWidth: "300px" }}>
       <h2 className="mb-2 text-center text-base letter-spacing-tight uppercase flex items-center justify-evenly">
         {title}
         {count > -1 && (
