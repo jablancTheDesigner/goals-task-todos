@@ -9,6 +9,7 @@ const todosSlice = createSlice({
   name: "todos",
   initialState: {
     todos: JSON.parse(localStorage.getItem("todos")) || [],
+    formOpen: false,
   },
   reducers: {
     addTodo: (state, name) => {
@@ -83,6 +84,10 @@ const todosSlice = createSlice({
       state.todos = completedList;
       storeLocal(completedList);
     },
+    toggleForm: (state, trigger) => {
+      console.log(trigger);
+      state.formOpen = trigger.payload;
+    },
   },
 });
 
@@ -94,10 +99,15 @@ export const {
   toggleCompleted,
   activate,
   deactivate,
+  toggleForm,
 } = todosSlice.actions;
 
 export const getTodos = (state) => {
   return state.todos.todos;
+};
+
+export const isFormOpen = (state) => {
+  return state.todos.formOpen;
 };
 
 export default todosSlice.reducer;

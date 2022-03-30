@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/reducers/todoSlice";
+import { addTodo, toggleForm } from "../redux/reducers/todoSlice";
 
 export default function TodoForm(props) {
   const dispatch = useDispatch();
@@ -9,6 +9,7 @@ export default function TodoForm(props) {
   function handleSubmission(e) {
     e.preventDefault();
     dispatch(addTodo(name));
+    dispatch(toggleForm(false));
     setName("");
   }
   function handleChange(e) {
@@ -16,7 +17,10 @@ export default function TodoForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmission} className="todo-form">
+    <form
+      onSubmit={handleSubmission}
+      className="todo-form fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/75 transition ease-in-out z-20"
+    >
       <div className="grid grid-cols-4">
         <input
           type="text"
@@ -33,6 +37,12 @@ export default function TodoForm(props) {
           Add
         </button>
       </div>
+      <button
+        onClick={() => dispatch(toggleForm(false))}
+        className=" bg-red-900 text-white text-sm rounded-full p-4 shadow-lg w-20 h-20 flex items-center justify-center z-10 mt-6"
+      >
+        Cancel
+      </button>
     </form>
   );
 }

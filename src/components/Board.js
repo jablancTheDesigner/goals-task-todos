@@ -9,7 +9,7 @@ function Board({ children, title, count }) {
           <small className="block ml-1">{`count: ${count}`}</small>
         )}
       </h2>
-      <div className="grow overflow-y-auto overflow-x-hidden bg-white rounded-lg p-3 relative">
+      <div className="overflow-y-auto overflow-x-hidden bg-white rounded-lg p-3 relative flex flex-col gap-4">
         {children}
       </div>
     </div>

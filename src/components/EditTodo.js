@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { editTodo } from "../redux/reducers/todoSlice";
 
 const btnclass =
-  "p-2 text-sm bg-gray-200 text-gray-900 hover:bg-gray-700 hover:text-white flex-1";
+  "p-2 text-sm text-gray-900 hover:bg-gray-700 hover:text-white flex-1 rounded-lg font-bold";
 
 export default function EditTodo(props) {
   const dispatch = useDispatch();
@@ -24,15 +24,21 @@ export default function EditTodo(props) {
   }
 
   return (
-    <form className="stack-small text-center mb-4" onSubmit={handleSubmit}>
-      <div className="flex flex-wrap gap-2">
-        <input
+    <form
+      className="stack-small text-center border-2 rounded-lg border-gray-200"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex flex-wrap gap-1">
+        <textarea
           id={props.id}
-          className="todo-text p-3 w-full drop-shadow-lg"
+          className="todo-text p-3 w-full drop-shadow-lg rounded-lg"
           type="text"
           onChange={handleChange}
           placeholder={`New name for "${props.name}"`}
-        />
+        >
+          {props.name}
+        </textarea>
+
         <button type="submit" className={btnclass}>
           Save
         </button>
