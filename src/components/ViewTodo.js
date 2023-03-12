@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   activate,
@@ -44,13 +43,12 @@ export default function ViewTodo(props) {
       <div className="flex w-full bg-white shadow-sm">
         {!props.active && (
           <>
-            <TodoAction name="Activate" func={activate(props.id)} callback={setOpenAction} />
+            <TodoAction name="Activate" func={activate(props.id)} />
             <button
               type="button"
               className={btnclass}
               onClick={() => {
                 props.setIsEditing(true)
-                setOpenAction(false)
               }}
             >
               Edit
@@ -60,16 +58,15 @@ export default function ViewTodo(props) {
         {props.active && !props.completed && (
           <>
             {!props.inProgress && (
-              <TodoAction name="Progress" func={toggleInProgress(props.id)} callback={setOpenAction} />
+              <TodoAction name="Progress" func={toggleInProgress(props.id)} />
             )}
-            <TodoAction name="Backlog" func={deactivate(props.id)} callback={setOpenAction} />
-            <TodoAction name="Complete" func={toggleCompleted(props.id)} callback={setOpenAction} />
+            <TodoAction name="Backlog" func={deactivate(props.id)} />
+            <TodoAction name="Complete" func={toggleCompleted(props.id)} />
             <button
               type="button"
               className={btnclass}
               onClick={() => {
                 props.setIsEditing(true)
-                setOpenAction(false)
               }}
             >
               Edit
@@ -81,7 +78,6 @@ export default function ViewTodo(props) {
           className="p-2 text-xs hover:bg-gray-700 text-white font-bold bg-red-600 flex-1"
           onClick={() => {
             dispatch(deleteTodo(props.id))
-            setOpenAction(false)
           }}
         >
           Delete
