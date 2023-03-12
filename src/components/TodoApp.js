@@ -1,12 +1,11 @@
 import React from "react";
 import Todo from "./Todo";
 import Board from "./Board";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getTodos } from "../redux/reducers/todoSlice";
 
 export default function TodoApp() {
   const todosV2 = useSelector(getTodos);
-  const dispatch = useDispatch();
   const activeList = todosV2.filter(
     (task) => task.active && !task.completed && !task.inProgress
   );
@@ -28,7 +27,7 @@ export default function TodoApp() {
             />
           );
         })}
-        {list.length == 0 && <h4 className="text-center">No Tasks</h4>}
+        {list.length === 0 && <h4 className="text-center">No Tasks</h4>}
       </Board>
     );
   };
