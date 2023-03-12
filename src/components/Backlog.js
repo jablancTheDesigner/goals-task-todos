@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 
 export const Backlog = () => {
     const todos = useSelector(getTodos);
-    const activeList = todos.filter((task, idx) => task.active && (idx < 5));
+    const inProgressList = todos.filter((task, idx) => task.inProgress && (idx < 5));
+    const inProgressCount = todos.filter((task, idx) => task.inProgress);
     const labelStyles = "text-teal-900 font-bold flex justify-between items-center p-2 px-2"
     return (
         <div className="container mx-auto max-w-6xl p-4 grid gap-8 grid-cols-8">
             <div className="col-span-8 md:col-span-3 flex flex-col gap-8">
                 <div className="border border-gray-300 rounded-md bg-white shadow-sm ">
-                    <h3 className={`${labelStyles}`}>Total</h3>
+                    <h3 className={`${labelStyles}`}>In-Progress Total</h3>
                     <h2 className="p-2 border-y border-gray-300 text-center text-5xl">
-                        {todos.length}
+                        {inProgressCount.length}
                     </h2>
                     <Link to="/boards" className="p-2 block">
                         View boards &gt;
@@ -22,14 +23,14 @@ export const Backlog = () => {
                 <div className="border border-gray-300 rounded-md bg-white shadow-sm">
                     <h3 className={`${labelStyles}`}>Active</h3>
                     <ol className="p-2 border-y border-gray-300">
-                        {activeList.map((item, idx) => {
+                        {inProgressList.map((item, idx) => {
                             return (
                                 <li key={`${item.id}`} className="">
                                     <h4>{idx+1}. {item.name}</h4>
                                 </li>
                             );
                         })}
-                        {activeList.length === 0 && <h4>No Tasks</h4>}
+                        {inProgressList.length === 0 && <h4>No Tasks</h4>}
                     </ol>
                     <Link to="/boards" className="p-2 block">
                         View boards &gt;
