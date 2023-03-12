@@ -1,8 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import TodoForm from "../components/TodoForm";
-import { getTodos, toggleForm, isFormOpen } from "../redux/reducers/todoSlice";
+import { toggleForm, isFormOpen } from "../redux/reducers/todoSlice";
 import { useState } from "react";
 
 export const Layout = () => {
@@ -20,13 +19,13 @@ export const Layout = () => {
             <div className="absolute top-4 right-4 z-10 bg-white shadow-sm">
               <ul className="flex flex-col list-none justify-end text-teal-900 h-full font-bold">
                 <li className="px-4 py-2">
-                  <Link to="/" onClick={() => setMenuOpen(false)}>// Home</Link>
+                  <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
                 </li>
                 <li className="px-4 py-2">
-                  <Link to="/backlog" onClick={() => setMenuOpen(false)}>// Backlog</Link>
+                  <Link to="/backlog" onClick={() => setMenuOpen(false)}>Backlog</Link>
                 </li>
                 <li className="px-4 py-2">
-                  <Link to="/boards" onClick={() => setMenuOpen(false)}>// Boards</Link>
+                  <Link to="/boards" onClick={() => setMenuOpen(false)}>Boards</Link>
                 </li>
               </ul>
             </div>

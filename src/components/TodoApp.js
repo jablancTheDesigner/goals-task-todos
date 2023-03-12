@@ -1,20 +1,17 @@
 import React from "react";
-import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import Board from "./Board";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodos, toggleForm, isFormOpen } from "../redux/reducers/todoSlice";
+import { getTodos } from "../redux/reducers/todoSlice";
 
 export default function TodoApp() {
   const todosV2 = useSelector(getTodos);
   const dispatch = useDispatch();
-  const backlogList = todosV2.filter((task) => !task.active);
   const activeList = todosV2.filter(
     (task) => task.active && !task.completed && !task.inProgress
   );
   const completeList = todosV2.filter((task) => task.completed);
   const inProgressList = todosV2.filter((task) => task.inProgress);
-  const isOpen = useSelector(isFormOpen);
 
   const renderBoard = (name, title, list) => {
     return (

@@ -28,14 +28,6 @@ function TodoAction({ name, func, Icon, callback }) {
 
 export default function ViewTodo(props) {
   const dispatch = useDispatch();
-  const [openAction, setOpenAction] = useState(false);
-
-  useEffect(() => {
-    document.body.click = () => {
-      console.log('here')
-    }
-  }, [])
-
   return (
     <div
       className={`view-todo flex flex-col border-2 rounded-lg border-gray-200 relative `}
