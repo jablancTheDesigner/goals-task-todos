@@ -31,27 +31,18 @@ export default function TodoApp() {
             />
           );
         })}
+        {list.length == 0 && <h4 className="text-center">No Tasks</h4>}
       </Board>
     );
   };
 
   return (
-    <div className="todo-app flex flex-col">
-      <div className="todo-app__task-list p-4 grow flex gap-4 overflow-x-auto flex-nowrap">
-        {renderBoard("backlog", "Backlog", backlogList)}
+    <div className="flex flex-col flex-grow">
+      <div className="p-4 grow flex gap-4 overflow-x-auto flex-nowrap">
         {renderBoard("toDo", "To Do", activeList)}
         {renderBoard("inProgress", "In Progress", inProgressList)}
         {renderBoard("complete", "Complete", completeList)}
       </div>
-
-      {isOpen && <TodoForm />}
-
-      <button
-        onClick={() => dispatch(toggleForm(true))}
-        className="fixed bottom-10 right-10 bg-lime-900 text-white text-2xl rounded-full p-4 shadow-lg w-16 h-16 flex items-center justify-center z-10"
-      >
-        +
-      </button>
     </div>
   );
 }

@@ -21,13 +21,13 @@ export default function TodoForm(props) {
       onSubmit={handleSubmission}
       className="todo-form fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black/75 transition ease-in-out z-20"
     >
-      <div className="grid grid-cols-4">
+      <div className="max-w-2xl w-full mx-auto flex p-4">
         <input
           type="text"
           value={name}
           name="name"
           onChange={handleChange}
-          className="todo-form__input col-span-3 h-16 p-4"
+          className="h-16 p-4 w-full"
           placeholder="Add New Task"
         />
         <button
