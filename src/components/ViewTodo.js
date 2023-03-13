@@ -9,7 +9,7 @@ import {
 } from "../redux/reducers/todoSlice";
 
 const btnclass =
-  "p-2 text-xs text-gray-900 hover:bg-gray-700 hover:text-white font-bold odd:bg-gray-100 flex-1";
+  "p-2 text-xs text-gray-900 hover:bg-gray-700 hover:text-white font-bold flex-1";
 
 function TodoAction({ name, func, Icon, callback }) {
   const dispatch = useDispatch();
@@ -29,11 +29,11 @@ export default function ViewTodo(props) {
   const dispatch = useDispatch();
   return (
     <div
-      className={`view-todo flex flex-col border-2 rounded-lg border-gray-200 relative `}
+      className={`view-todo flex flex-col rounded-md relative shadow-sm border border-gray-300`}
     >
-      <div className="view-todo__details w-full text-left p-3 bg-white rounded-lg cursor-text flex">
+      <div className="view-todo__details w-full text-left p-3 bg-white rounded-md cursor-text flex border-b border-gray-300">
         <label
-          className={`view-todo__label ml-2 text-base rounded-lg`}
+          className={`view-todo__label ml-2 text-base rounded-md`}
           htmlFor={props.id}
         >
           {props.name}
