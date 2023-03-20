@@ -17,7 +17,7 @@ export const Layout = ({flow}) => {
           {flow === 'backlog' && <Link to="/boards" className="text-white">Boards</Link>}
         </div>
       </nav>
-      <div className="flex items-center justify-center gap-4 px-4 py-2 border-t-2 sticky top-0 bg-white shadow-md">
+      <div className="flex items-center justify-center gap-4 px-4 py-2 border-t-2 sticky top-0 bg-white shadow-md z-10">
         <h4 className="text-xl font-bold">Add new task</h4>
         <button
           onClick={() => dispatch(toggleForm(true))}
