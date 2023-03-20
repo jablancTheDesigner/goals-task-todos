@@ -10,10 +10,11 @@ function App() {
     <div className="app flex flex-col">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout flow="backlog" />}>
             <Route index element={<BacklogPage />} />
-            <Route path="backlog" element={<BacklogPage />} />
-            <Route path="boards" element={<TodoApp />} />
+          </Route>
+          <Route path="/boards" element={<Layout flow="boards" />}>
+            <Route index element={<TodoApp />} />
           </Route>
         </Routes>
       </BrowserRouter>
